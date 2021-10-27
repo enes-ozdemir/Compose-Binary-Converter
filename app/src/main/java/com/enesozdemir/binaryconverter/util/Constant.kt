@@ -1,10 +1,6 @@
 package com.enesozdemir.binaryconverter.util
 
-import com.enesozdemir.binaryconverter.presentation.components.TabItem
-
 object Constant {
-
-
     const val Header = "Binary Converter"
     const val Enter_Text = "Enter Text"
     const val Enter_Binary = "Enter Binary"

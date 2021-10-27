@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.enesozdemir.binaryconverter.presentation.components.TabItem
 import com.enesozdemir.binaryconverter.presentation.theme.BackgroundColor
+import com.enesozdemir.binaryconverter.presentation.theme.BinaryConverterTheme
 import com.enesozdemir.binaryconverter.util.Constant
 import com.google.accompanist.pager.*
 import kotlinx.coroutines.launch
@@ -30,7 +31,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MainScreen()
+            BinaryConverterTheme {
+                MainScreen()
+            }
         }
     }
 }
@@ -66,7 +69,6 @@ fun MainScreen() {
         }
     }
 }
-
 
 @ExperimentalMaterialApi
 @ExperimentalPagerApi

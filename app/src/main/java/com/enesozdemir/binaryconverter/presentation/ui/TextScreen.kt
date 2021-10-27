@@ -55,8 +55,7 @@ fun TextScreen() {
                 colors = ButtonDefaults.buttonColors(backgroundColor = BackgroundColor),
                 onClick = {
                     inputText = BinaryConverter().getTextToBinary(text).toString()
-
-                    /* To execute when button is clicked */ }) {
+                }) {
                 Text(text = Constant.Convert, color = Color.White)
             }
         }

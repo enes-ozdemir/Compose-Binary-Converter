@@ -62,7 +62,6 @@ fun BinaryScreen() {
                 colors = ButtonDefaults.buttonColors(backgroundColor = BackgroundColor),
                 onClick = {
                     inputText = BinaryConverter().getBinaryToText(text)
-
                 }) {
                 Text(text = Constant.Convert, color = Color.White)
             }

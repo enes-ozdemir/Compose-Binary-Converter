@@ -7,13 +7,12 @@ class BinaryConverter {
 
     fun getBinaryToText(binary: String): String {
         try {
-            return convertBinaryToDecimal(binary.toLong()).toString()
+            return convertBinaryToDecimal(binary.toLong(2)).toString()
         } catch (ex: NumberFormatException) {
             Log.i("Binary Converter", "Error$ex")
         }
         return "Not a binary value"
     }
-
 
     private fun convertBinaryToDecimal(num: Long): Int {
         var num = num
@@ -56,10 +55,9 @@ class BinaryConverter {
 
     private fun reverse(input: String): String? {
         val a = input.toCharArray()
-        var l: Int
         var r = 0
         r = a.size - 1
-        l = 0
+        var l: Int = 0
         while (l < r) {
 
             // Swap values of l and r
@@ -71,6 +69,4 @@ class BinaryConverter {
         }
         return String(a)
     }
-
-
 }
