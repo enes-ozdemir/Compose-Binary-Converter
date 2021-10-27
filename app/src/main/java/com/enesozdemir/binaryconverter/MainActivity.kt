@@ -4,12 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
@@ -138,65 +140,119 @@ fun TabsContent(tabs: List<TabItem>, pagerState: PagerState) {
     }
 }
 
+@ExperimentalMaterialApi
+@ExperimentalPagerApi
+@Preview(showBackground = true)
+@Composable
+fun TabsContentPreview() {
+    val tabs = listOf(
+        TabItem.TextToBinary,
+        TabItem.BinaryToText,
+    )
+    val pagerState = rememberPagerState()
+    TabsContent(tabs = tabs, pagerState = pagerState)
+}
+
+@Preview(showBackground = true)
 @Composable
 fun TextScreen() {
     Column(
         modifier = Modifier
-            .fillMaxSize()
             .background(
                 colorResource(
                     id = R.color.white
                 )
             )
-            .wrapContentSize(Alignment.Center)
     ) {
-        Text(
-            text = "Music View",
-            fontWeight = FontWeight.Bold,
-            color = Color.White,
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            textAlign = TextAlign.Start,
-            fontSize = 25.sp
-        )
+        var text by rememberSaveable { mutableStateOf("") }
+        Column(
+        ) {
+            TextField(
+                value = text,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentSize(),
+                textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Center),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                onValueChange = { it ->
+                    text = it.filter { it == '0' || it == '1' }
+                },
+                label = { Text("Enter Binary") },
+            )
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentSize()
+                    .padding(10.dp),
+            ) {
+                Button(
+                    colors = ButtonDefaults.buttonColors(backgroundColor = BackgroundColor),
+                    onClick = {/* To execute when button is clicked */ }) {
+                    Text("Convert", color = Color.White)
+                }
+            }
+            Text(
+                text = "Text",
+                fontWeight = FontWeight.Light,
+                color = Color.Black,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentSize(),
+                textAlign = TextAlign.Center,
+                fontSize = 25.sp
+            )
+        }
     }
 }
 
 @Composable
 fun BinaryScreen() {
-    var text by rememberSaveable { mutableStateOf("") }
     Column(
+        modifier = Modifier
+            .background(
+                colorResource(
+                    id = R.color.white
+                )
+            )
     ) {
-        TextField(
-            value = text,
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentSize(),
-            textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Center),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            onValueChange = { it ->
-                text = it.filter { it == '0' || it == '1' }
-            },
-            label = { Text("Enter Binary") },
-        )
+
+        var text by rememberSaveable { mutableStateOf("") }
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentSize()
-                .padding(10.dp),
         ) {
-            Button(onClick = {/* To execute when button is clicked */ }) {
-                Text("I'm a Compose Button")
+            TextField(
+                value = text,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentSize(),
+                textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Center),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                onValueChange = { it ->
+                    text = it.filter { it == '0' || it == '1' }
+                },
+                label = { Text("Enter Binary") },
+            )
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentSize()
+                    .padding(10.dp),
+            ) {
+                Button(
+                    colors = ButtonDefaults.buttonColors(backgroundColor = BackgroundColor),
+                    onClick = {/* To execute when button is clicked */ }) {
+                    Text("Convert", color = Color.White)
+                }
             }
+            Text(
+                text = "Text",
+                fontWeight = FontWeight.Light,
+                color = Color.Black,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentSize(),
+                textAlign = TextAlign.Center,
+                fontSize = 25.sp
+            )
         }
-        Text(
-            text = "Text",
-            fontWeight = FontWeight.Light,
-            color = Color.Black,
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentSize(),
-            textAlign = TextAlign.Center,
-            fontSize = 25.sp
-        )
     }
 }
