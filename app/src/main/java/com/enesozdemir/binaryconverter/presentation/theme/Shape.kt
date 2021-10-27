@@ -1,4 +1,4 @@
-package com.enesozdemir.binaryconverter.ui.theme
+package com.enesozdemir.binaryconverter.presentation.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes
